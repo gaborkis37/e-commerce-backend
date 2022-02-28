@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { userRouter } from "./routes/users";
+import { userRouter } from "./src/routes/users";
+import { authRouter } from "./src/routes/auth";
 
 const app = express();
 
@@ -15,6 +16,7 @@ mongoose
   .catch((error) => console.log(error));
 
 app.use(express.json());
+app.use("/api/auth", authRouter());
 app.use("/api/users", userRouter());
 
 app.listen(process.env.PORT || 5000, () => {
