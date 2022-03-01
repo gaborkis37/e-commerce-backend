@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { User, IUser } from "../models/User";
 import CryptoJs from "crypto-js";
+import jwt from "jsonwebtoken";
 
 export const registerUser = async (req: Request, res: Response) => {
   const newUser: IUser = new User({
@@ -36,9 +37,18 @@ export const loginUser = async (req: Request, res: Response) => {
       return res.status(401).json("Wrong credentials");
     }
 
-    const { password, ...others } = user._doc;
+    const accessToken = jwt.sign(
+      {
+        id: user._id,
+        isAdmin: user.isAdmin,
+      },
+      process.env.JWT_SEC,
+      { expiresIn: "3d" }
+    );
 
-    res.status(200).json(others);
+    const { password, ...userWithoutPassword } = user._doc;
+
+    res.status(200).json({ ...userWithoutPassword, accessToken });
   } catch (error) {
     res.status(500).json(error.message);
   }

@@ -2,7 +2,7 @@ import { Schema, model, Model } from "mongoose";
 
 interface ICart extends Document {
   userId: string;
-  products: Array<Object>;
+  products: object[];
 }
 
 const CartSchema: Schema = new Schema(

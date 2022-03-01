@@ -4,10 +4,10 @@ interface IProduct extends Document {
   title: string;
   desc: string;
   img: string;
-  categories: Array<Object>;
-  size: String;
-  color: String;
-  price: Number;
+  categories: object[];
+  size: string;
+  color: string;
+  price: number;
 }
 
 const ProductSchema: Schema = new Schema(

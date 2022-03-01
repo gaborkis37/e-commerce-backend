@@ -2,10 +2,10 @@ import { Schema, model, Model, Document } from "mongoose";
 
 interface IOrder extends Document {
   userId: string;
-  products: Array<Object>;
+  products: object[];
   amount: string;
   address: string;
-  status: Array<Object>;
+  status: object[];
 }
 
 const OrderSchema: Schema = new Schema(
