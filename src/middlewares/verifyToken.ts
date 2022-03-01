@@ -38,3 +38,17 @@ export const verifyTokenAndAuthorization = (
     }
   });
 };
+
+export const verifyTokenAndAdmin = (
+  req: IGetUserAuthInfoRequest,
+  res: Response,
+  next: () => void
+) => {
+  verifyToken(req, res, () => {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      res.status(403).json("You are not authorized to perform that action");
+    }
+  });
+};
