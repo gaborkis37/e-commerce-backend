@@ -5,8 +5,8 @@ export interface IProduct extends Document {
   desc: string;
   img: string;
   categories: object[];
-  size: string;
-  color: string;
+  size: string[];
+  color: string[];
   price: number;
 }
 
@@ -15,9 +15,9 @@ const ProductSchema: Schema = new Schema(
     title: { type: String, required: true, unique: true },
     desc: { type: String, required: true },
     img: { type: String, required: true },
-    categories: { type: Array, default: false },
-    size: { type: String },
-    color: { type: String },
+    categories: { type: Array },
+    size: { type: Array },
+    color: { type: Array },
     price: { type: Number, required: true },
   },
   { timestamps: true }
